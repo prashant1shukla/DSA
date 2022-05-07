@@ -28,6 +28,16 @@ int height(Node *root)
     else
         return (max(height(root->left),height(root->right))+1);
 }
+void printKdist(Node *root,int k)
+{
+    if(root==NULL)
+        return;
+    if(k==0)
+        cout<<(root->key)<<" ";
+    else
+        printKdist(root->left,k-1);
+        printKdist(root->right,k-1);
+}
 int main()
 {
     Node *root=new Node(10);
@@ -38,4 +48,5 @@ int main()
     inorder(root);
     cout<<endl;
     cout<<height(root)<<endl;
+    printKdist(root,2);
 }
