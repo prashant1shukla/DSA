@@ -38,6 +38,23 @@ void printKdist(Node *root,int k)
         printKdist(root->left,k-1);
         printKdist(root->right,k-1);
 }
+void printlevel(Node *root)
+{
+    if(root==NULL)
+        return;
+    queue<Node *>q;
+    q.push(root);
+    while(q.empty()==false)
+    {
+        Node *curr=q.front();
+        q.pop();
+        cout<<(curr->key)<<" ";
+        if(curr->left!=NULL)
+            q.push(curr->left);
+        if(curr->right!=NULL)
+            q.push(curr->right);
+    }
+}
 int main()
 {
     Node *root=new Node(10);
@@ -49,4 +66,7 @@ int main()
     cout<<endl;
     cout<<height(root)<<endl;
     printKdist(root,2);
+    cout<<endl;
+    printlevel(root);
+    cout<<endl;
 }
