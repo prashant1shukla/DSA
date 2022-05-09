@@ -21,6 +21,24 @@ void inorder(Node *root)
         inorder(root->right);
     }
 }
+void preorder(Node *root)
+{
+    if(root!=NULL)
+    {
+        cout<<(root->key)<<" ";
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+void postorder(Node *root)
+{
+    if(root!=NULL)
+    {
+        postorder(root->left);
+        postorder(root->right);
+        cout<<(root->key)<<" ";
+    }
+}
 int height(Node *root)
 {
     if(root==NULL)
@@ -55,6 +73,53 @@ void printlevel(Node *root)
             q.push(curr->right);
     }
 }
+void printlevelorderline_addingNULL(Node *root)
+{
+    if(root==NULL)
+        return;
+    queue<Node *>q;
+    q.push(root);
+    q.push(NULL);
+    while(q.size()>1)
+    {
+        Node *curr=q.front();
+        q.pop();
+        if(curr==NULL)
+        {
+            cout<<"\n";
+            q.push(NULL);
+            continue;
+        }
+        cout<<(curr->key)<<" ";
+        if(curr->left!=NULL)
+            q.push(curr->left);
+        if(curr->right!=NULL)
+            q.push(curr->right);
+    }
+}
+void printlevelorderline_loop(Node *root)
+{
+    if(root==NULL)
+        return;
+    queue<Node *>q;
+    q.push(root);
+    while(q.empty()==false)
+    {
+        int count=q.size();
+        for(int i=0;i<count;i++)
+        {
+            Node *curr=q.front();
+            q.pop();
+            cout<<curr->key<<" ";
+            if(curr->left!=NULL)
+                q.push(curr->left);
+            if(curr->right!=NULL)
+                q.push(curr->right);
+        }
+        cout<<endl;
+    }
+}
+
 int main()
 {
     Node *root=new Node(10);
@@ -62,11 +127,23 @@ int main()
     root->right=new Node(30);
     root->left->left=new Node(40);
     root->left->right=new Node(50);
+
     inorder(root);
     cout<<endl;
+    preorder(root);
+    cout<<endl;
+    postorder(root);
+    cout<<endl;
+
     cout<<height(root)<<endl;
+
     printKdist(root,2);
     cout<<endl;
+
     printlevel(root);
     cout<<endl;
+
+    printlevelorderline_addingNULL(root);
+    cout<<endl;
+    printlevelorderline_loop(root);
 }
