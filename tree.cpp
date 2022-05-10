@@ -119,7 +119,51 @@ void printlevelorderline_loop(Node *root)
         cout<<endl;
     }
 }
-
+int getsize(Node *root)
+{
+    if(root==NULL)
+        return 0;
+    else   
+        return(1+getsize(root->left)+getsize(root->right));
+}
+int getMax(Node *root)
+{
+    if(root==NULL)
+        return INT_MIN;
+    else
+        return(max(root->key,max(getMax(root->left),getMax(root->right))));
+    
+}
+int maxlevel=0;
+void printLeft(Node *root,int level)
+{
+    if(root==NULL)
+        return;
+    if(maxlevel<level)
+    {
+        cout<<(root->key)<<" ";
+        maxlevel=level;
+    }
+    printLeft(root->left,level+1);
+    printLeft(root->right,level+1);
+}
+void printLeftView(Node *root)
+{
+    printLeft(root,1);
+}
+// void printLeftITR(Node *root)
+// {
+//     if(root==NULL)
+//         return;
+//     queue<Node *>q;
+//     q.push(root);
+//     while(q.empty()==false)
+//     {
+//         int count=q.size();
+//         for(int i=0;i<q.size)
+//     }    
+    
+// }
 int main()
 {
     Node *root=new Node(10);
@@ -146,4 +190,15 @@ int main()
     printlevelorderline_addingNULL(root);
     cout<<endl;
     printlevelorderline_loop(root);
+
+    cout<<getsize(root)<<endl;
+
+    cout<<getMax(root)<<endl;
+
+    printLeftView(root);
+    cout<<endl;
+
+    //printLeftITR(root);
+
+
 }
