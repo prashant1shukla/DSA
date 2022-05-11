@@ -151,19 +151,29 @@ void printLeftView(Node *root)
 {
     printLeft(root,1);
 }
-// void printLeftITR(Node *root)
-// {
-//     if(root==NULL)
-//         return;
-//     queue<Node *>q;
-//     q.push(root);
-//     while(q.empty()==false)
-//     {
-//         int count=q.size();
-//         for(int i=0;i<q.size)
-//     }    
+void printLeftITR(Node *root)
+{
+    if(root==NULL)
+        return;
+    queue<Node *>q;
+    q.push(root);
+    while(q.empty()==false)
+    {
+        int count=q.size();
+        for(int i=0;i<count;i++)
+        {
+            Node *curr=q.front();
+            q.pop();
+            if(i==0)
+                cout<<(curr->key)<<" ";
+            if(curr->left!=NULL)
+                q.push(curr->left);
+            if(curr->right!=NULL)
+                q.push(curr->right);
+        }
+    }    
     
-// }
+}
 int main()
 {
     Node *root=new Node(10);
@@ -198,7 +208,6 @@ int main()
     printLeftView(root);
     cout<<endl;
 
-    //printLeftITR(root);
-
+    printLeftITR(root);
 
 }
