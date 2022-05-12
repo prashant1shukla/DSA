@@ -185,7 +185,29 @@ bool isChildrenSum(Node *root)
     if(root->right!=NULL)
         sum+=root->right->key;
     return(root->key==sum && isChildrenSum(root->left) && isChildrenSum(root->right));
-
+}
+bool isBalanced(Node *root)//where we already have the height function.
+{
+    if(root==NULL)
+        return true;
+    int lh=height(root->left);
+    int rh=height(root->right);
+    return(abs(lh-rh)<=1 && isBalanced(root->left) && isBalanced(root->right));
+}
+int isBalanced2(Node *root)
+{
+    if(root==NULL)
+        return 0;
+    int lh=isBalanced2(root->left);
+    if(lh==-1)
+        return -1;
+    int rh=isBalanced2(root->right);
+    if(rh==-1)
+        return -1;
+    if(abs(lh-rh)>1)
+        return -1;
+    else
+        return (max(lh,rh)+1);
 }
 int main()
 {
@@ -225,5 +247,10 @@ int main()
     cout<<endl;
 
     cout<<isChildrenSum(root)<<endl;
+
+    cout<<isBalanced(root)<<endl;
+    cout<<isBalanced2(root)<<endl;
+
+
 
 }
