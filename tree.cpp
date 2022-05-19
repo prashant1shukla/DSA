@@ -209,6 +209,29 @@ int isBalanced2(Node *root)
     else
         return (max(lh,rh)+1);
 }
+int maxWidth(Node *root)
+{
+    if(root==NULL)
+        return 0;
+    queue<Node *>q;
+    q.push(root);
+    int res=0;
+    while(q.empty()==false)
+    {
+        int count=q.size();
+        res=max(res,count);
+        for(int i=0;i<count;i++)
+        {
+            Node *curr=q.front();
+            q.pop();
+            if(curr->left!=NULL)
+                q.push(curr->left);
+            if(curr->right!=NULL)
+                q.push(curr->right);
+        }
+    }
+    return res;
+}
 int main()
 {
     Node *root=new Node(10);
@@ -251,6 +274,7 @@ int main()
     cout<<isBalanced(root)<<endl;
     cout<<isBalanced2(root)<<endl;
 
-
+    cout<<maxWidth(root)<<endl;
+  
 
 }
