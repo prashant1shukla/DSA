@@ -25,6 +25,7 @@ int main()
         }
         s.push(arr[i]);
     }
+    reverse(v.begin(),v.end());
     for(auto x:v)
         cout<<x<<" ";  // -1 -1 2 -1 
     cout<<endl;
