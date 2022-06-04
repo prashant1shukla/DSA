@@ -14,7 +14,7 @@ struct Node
 };
 void inorder(Node *root)
 {
-    if(root!=NULL)
+    if(root==NULL)
     {
         inorder(root->left);
         cout<<(root->key)<<" ";
@@ -151,7 +151,7 @@ void printLeftView(Node *root)
 {
     printLeft(root,1);
 }
-void printLeftITR(Node *root)
+void printLeftITR(Node *root)  //left view means printing the first elemtns of each level. easy when we will go with levelorder/bfs
 {
     if(root==NULL)
         return;
