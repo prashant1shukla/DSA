@@ -1,3 +1,6 @@
-inorder(root->left);
-        cout<<(root->key)<<" ";
-        inorder(root->right);
+Node *head=BTtoDLL(root);
+
+// printSpiral(root);
+
+// 	printlist(head);
+//     cout<<endl;

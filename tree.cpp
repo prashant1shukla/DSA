@@ -243,11 +243,69 @@ Node *BTtoDLL(Node *root)
     else 
     {
         root->left=prev;
-        root->right=root;
+        prev->right=root;
     }
     prev=root;
     BTtoDLL(root->right);
     return head;   
+}
+void printlist(Node *head)
+{
+    Node *curr=head;
+    while(curr!=NULL)
+    {
+        cout<<curr->key<<" ";
+        curr=curr->right;
+    }
+    cout<<endl;
+}
+//CONSTRUCT BINARY TREE FROM INORDER, PREORDER- PENDING.
+
+void printSpiral(Node *root)
+{
+    if(root==NULL)
+        return;
+    queue<Node *>q;
+    stack<int>s;
+    bool reverse=false;
+    q.push(root);
+    while(q.empty()==false)
+    {
+        int count=q.size();
+        for(int i=0;i<count;i++)
+        {
+            Node *curr=q.front();
+            q.pop();
+            if(reverse)
+                s.push(curr->key);
+            else
+                cout<<curr->key<<" ";
+            if(curr->left!=NULL)
+                q.push(curr->left);
+            if(curr->right!=NULL)
+                q.push(curr->right);
+        }
+        if(reverse)
+        {
+            while(s.empty()==false)
+            {
+                cout<<s.top()<<" ";
+                s.pop();
+            }
+        }
+        reverse=!reverse;
+        cout<<endl;
+    }
+}
+int dia=0;
+int heightfordiamter(Node *root)
+{
+    if(root==NULL)
+        return 0;
+    int lh=heightfordiamter(root->left);
+    int rh=heightfordiamter(root->right);
+    dia=max(dia,(1+lh+rh));
+    return 1+max(lh,rh);
 }
 int main()
 {
@@ -292,6 +350,15 @@ int main()
     cout<<isBalanced2(root)<<endl;
 
     cout<<maxWidth(root)<<endl;
-  
+    
+    Node *head=BTtoDLL(root);
+	printlist(head);
+    cout<<endl;
+
+    //printSpiral(root);  runtime-error due to running all code together.
+
+    // cout<<heightfordiamter(root)<<endl;     runtime-error due to running all code together.
+    // cout<<dia<<endl;
+    
 
 }
