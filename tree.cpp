@@ -232,6 +232,23 @@ int maxWidth(Node *root)
     }
     return res;
 }
+Node *BTtoDLL(Node *root)
+{
+    if(root==NULL)
+        return root;
+    static Node* prev=NULL;
+    Node *head=BTtoDLL(root->left);
+    if(prev==NULL)
+        head=root;
+    else 
+    {
+        root->left=prev;
+        root->right=root;
+    }
+    prev=root;
+    BTtoDLL(root->right);
+    return head;   
+}
 int main()
 {
     Node *root=new Node(10);

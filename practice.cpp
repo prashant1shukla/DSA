@@ -49,14 +49,18 @@ void kdist(Node *root,int k)
     if(k==0)
         cout<<root->key<<" ";
     else 
+    {
         kdist(root->left,k-1);
         kdist(root->right,k-1);
+    }
 }
 void bfs(Node *root)
 {
+    if(root==NULL)
+        return;
     queue<Node *>q;
     q.push(root);
-    while(q.empty()==false)
+    while(q.size()!=0)
     {
         Node *curr=q.front();
         q.pop();
@@ -69,22 +73,24 @@ void bfs(Node *root)
 }
 void levelorderline(Node *root)
 {
+    if(root==NULL)
+        return;
     queue<Node *>q;
     q.push(root);
-    while(q.size()!=NULL)
+    while(q.size()!=0)
     {
         int cnt=q.size();
-    for(int i=0;i<cnt;i++)
-    {
-        Node *curr=q.front();
-        q.pop();
-        cout<<curr->key<<" ";
-        if(curr->left!=NULL)
-            q.push(curr->left);
-        if(curr->right!=NULL)
-            q.push(curr->right);   
-    }
-    cout<<endl;
+        for(int i=0;i<cnt;i++)
+        {
+            Node *curr=q.front();
+            q.pop();
+            cout<<curr->key<<" ";
+            if(curr->left!=NULL)
+                q.push(curr->left);
+            if(curr->right!=NULL)
+                q.push(curr->right);
+        }
+        cout<<endl;        
     }
 }
 int size(Node *root)
@@ -114,7 +120,7 @@ void leftView(Node *root)
             Node *curr=q.front();
             q.pop();
             if(i==0)
-                cout<<curr->key<<" "; //not using else break; as hume aur ander jana h.
+                cout<<curr->key<<" ";   //not using else break; as hume aur ander jana h.
             if(curr->left!=NULL)
                 q.push(curr->left);
             if(curr->right!=NULL)
@@ -134,8 +140,7 @@ bool childrenSum(Node *root)
         sum+=root->left->key;
     if(root->right!=NULL)
         sum+=root->right->key;
-    return(root->key==sum && childrenSum(root->left) && childrenSum(root->right));
-
+    return(root->key==sum&&childrenSum(root->left)&&childrenSum(root->right));
 }
 int main()
 {
