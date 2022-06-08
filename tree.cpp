@@ -261,52 +261,52 @@ void printlist(Node *head)
 }
 //CONSTRUCT BINARY TREE FROM INORDER, PREORDER- PENDING.
 
-void printSpiral(Node *root)
-{
-    if(root==NULL)
-        return;
-    queue<Node *>q;
-    stack<int>s;
-    bool reverse=false;
-    q.push(root);
-    while(q.empty()==false)
-    {
-        int count=q.size();
-        for(int i=0;i<count;i++)
-        {
-            Node *curr=q.front();
-            q.pop();
-            if(reverse)
-                s.push(curr->key);
-            else
-                cout<<curr->key<<" ";
-            if(curr->left!=NULL)
-                q.push(curr->left);
-            if(curr->right!=NULL)
-                q.push(curr->right);
-        }
-        if(reverse)
-        {
-            while(s.empty()==false)
-            {
-                cout<<s.top()<<" ";
-                s.pop();
-            }
-        }
-        reverse=!reverse;
-        cout<<endl;
-    }
-}
-int dia=0;
-int heightfordiamter(Node *root)
-{
-    if(root==NULL)
-        return 0;
-    int lh=heightfordiamter(root->left);
-    int rh=heightfordiamter(root->right);
-    dia=max(dia,(1+lh+rh));
-    return 1+max(lh,rh);
-}
+// void printSpiral(Node *root)
+// {
+//     if(root==NULL)
+//         return;
+//     queue<Node *>q;
+//     stack<int>s;
+//     bool reverse=false;
+//     q.push(root);
+//     while(q.empty()==false)
+//     {
+//         int count=q.size();
+//         for(int i=0;i<count;i++)
+//         {
+//             Node *curr=q.front();
+//             q.pop();
+//             if(reverse)
+//                 s.push(curr->key);
+//             else
+//                 cout<<curr->key<<" ";
+//             if(curr->left!=NULL)
+//                 q.push(curr->left);
+//             if(curr->right!=NULL)
+//                 q.push(curr->right);
+//         }
+//         if(reverse)
+//         {
+//             while(s.empty()==false)
+//             {
+//                 cout<<s.top()<<" ";
+//                 s.pop();
+//             }
+//         }
+//         reverse=!reverse;
+//         cout<<endl;
+//     }
+// }
+// int dia=0;
+// int heightfordiamter(Node *root)
+// {
+//     if(root==NULL)
+//         return 0;
+//     int lh=heightfordiamter(root->left);
+//     int rh=heightfordiamter(root->right);
+//     dia=max(dia,(1+lh+rh));
+//     return 1+max(lh,rh);
+// }
 int main()
 {
     Node *root=new Node(10);
