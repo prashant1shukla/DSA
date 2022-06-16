@@ -50,6 +50,5 @@ int main()
 {
     int arr[9]={1,3,5,10,10,10,10,14,16};
     cout<<Count(arr,10)<<endl;
-   
 }
 
