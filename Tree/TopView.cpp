@@ -14,7 +14,7 @@ struct Node
 };
 vector<int>v;
   
-void top(Node *root,int hd,int lvl,map<int,pair<int,int>>&mp)
+void top(Node *root,int hd,int lvl,map<int,vector<int,int>>&mp)
 {
     if(root==NULL)
         return;
