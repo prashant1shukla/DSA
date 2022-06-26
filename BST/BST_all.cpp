@@ -115,7 +115,40 @@ Node *delNode(Node *root,int x)
     }
     return root;
 }
-
+Node *floor(Node *root, int x)
+{
+    Node *res=NULL;
+    while(root!=NULL)
+    {
+        if(root->key==x)
+            return root;
+        else if(root->key>x)
+            root=root->left;
+        else
+        {
+            res=root;
+            root=root->right;
+        }
+    }
+    return res;
+}
+Node *ceil(Node *root, int x)
+{
+    Node *res=NULL;
+    while(root!=NULL)
+    {
+        if(root->key==x)
+            return root;
+        else if(root->key<x)
+            root=root->right;
+        else
+        {
+            res=root;
+            root=root->left;
+        }
+    }
+    return res;
+}
 int main()
 {
     Node *root=new Node(15);
@@ -149,4 +182,8 @@ int main()
     preorder(root3);
     cout<<endl;
 
+Node *root4=floor(root,19);
+Node *root5=ceil(root,19);
+cout<<root4->key<<endl;
+cout<<root5->key<<endl;
 }
