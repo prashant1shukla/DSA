@@ -164,6 +164,39 @@ void DFS(vector<int>adj[],int v,int s)
         visited[i]=false;
     DFSRec(adj,s,visited);
 }
+void BFS_dist(vector<int>adj[],int v,int s,int dist[])
+{
+    bool visited[v];
+    for(int i=0;i<v;i++)
+        visited[i]=false;
+    queue<int>q;
+    q.push(s);
+    visited[s]=true;
+    while(q.empty()==false)
+    {
+        int u=q.front();
+        q.pop();
+        for(int v:adj[u])
+        {
+            if(visited[v]==false)
+            {
+                dist[v]=dist[u]+1;
+                visited[v]=true;
+                q.push(v);
+            }
+        }
+    }
+}
+void printShortestPath(vector<int>adj[],int v)
+{
+    int dist[v];
+    for(int i=0;i<v;i++)
+        dist[i]=INT_MAX;
+    dist[0]=0;
+    BFS_dist(adj,v,0,dist);
+    for(int i=0;i<v;i++)
+        cout<<dist[i]<<" ";
+}
 int main()
 {
     int v=4;
@@ -182,4 +215,8 @@ int main()
     cout<<count_connectingcmp_undirected(adj,v)<<endl;
 
     DFS(adj,v,0);
+    cout<<endl;
+
+    printShortestPath(adj,v);
+    //cout<<"djdndikl";
 }
