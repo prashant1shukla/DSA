@@ -187,7 +187,7 @@ void BFS_dist(vector<int>adj[],int v,int s,int dist[])
         }
     }
 }
-void printShortestPath(vector<int>adj[],int v)
+void printShortestPath(vector<int>adj[],int v)  //shortest path for undirected graph BFS based approach. 
 {
     int dist[v];
     for(int i=0;i<v;i++)
@@ -196,6 +196,66 @@ void printShortestPath(vector<int>adj[],int v)
     BFS_dist(adj,v,0,dist);
     for(int i=0;i<v;i++)
         cout<<dist[i]<<" ";
+}
+bool DFSRecUndirected(vector<int>adj[], int s, bool visited[], int parent)
+{
+    visited[s]=true;
+    for(auto u:adj[s])
+    {
+        if(visited[u]==false)
+        {
+            if(DFSRecUndirected(adj, u, visited, s)==true)
+                return true;
+            else if(!parent)
+                return true;
+        }
+    }
+    return false;
+}
+bool cycleUndirected(vector<int>adj[], int v) //If there is an visited element and that is not the parent of the of the selected element then it is returned as the true. DFS based approach.
+{
+    bool visited[v];
+    for(int i=0;i<v;i++)
+        visited[i]=false;
+    for(int i=0;i<v;i++)
+    {
+        if(visited[i]==false)
+        {
+            if(DFSRecUndirected(adj, i, visited, -1))
+                return true;
+        }
+    } 
+    return false;  
+}
+bool DFSRecDirected(vector<int>adj[],int s, bool visited[], bool recSt[])
+{
+    visited[s]=true;
+    recSt[s]=true;
+    for(int u: adj[s])
+    {
+        if(visited[u]==false&&DFSRecDirected(adj,u,visited,recSt))
+            return true;
+        else if(recSt[u]==true)
+            return true;
+    }
+    recSt[s]=false;
+    return false;
+}
+bool cycleDirected(vector<int>adj[], int v)
+{
+    bool visited[v];
+    bool recSt[v];
+    for(int i=0;i<v;i++)
+        visited[i]=false;
+    for(int i=0;i<v;i++)
+        recSt[i]=false;
+    for(int i=0;i<v;i++)
+    {
+        if(visited[i]==false)
+            if(DFSRecDirected(adj,i,visited,recSt))
+                return true;
+    }
+    return false;
 }
 int main()
 {
@@ -218,5 +278,17 @@ int main()
     cout<<endl;
 
     printShortestPath(adj,v);
-    //cout<<"djdndikl";
+    cout<<endl;
+
+    if(cycleUndirected(adj,v))
+        cout<<"yaya"<<endl;
+    else    
+        cout<<"Noooo"<<endl;
+
+    if(cycleDirected(adj,v))
+        cout<<"yaya"<<endl;
+    else    
+        cout<<"Noooo"<<endl;
+
+    
 }
