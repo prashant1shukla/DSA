@@ -73,7 +73,7 @@ vector<int> NSR_index(int arr[], int n)
 }
 int main()
 {
-    int arr[]={6,2,5,4,5,1,6};
+    int arr[]={2,4};
     int n=sizeof(arr)/sizeof(arr[0]);
     vector<int>left_index;
     left_index=NSL_index(arr,n);
