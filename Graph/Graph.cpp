@@ -257,9 +257,33 @@ bool cycleDirected(vector<int>adj[], int v)
     }
     return false;
 }
+//Dijkstra's Algo-> for finding the shortest path: drawback is 
+#define v 4
+vector<int>dijkstra(int graph[v][v],int s)
+{
+    vector<int>dist(v,INT_MAX);
+    vector<bool>fin(v,false);
+    for(int i=0;i<v-1;i++)
+    {
+        int u=-1;
+        for(int i=0;i<v-1;i++)
+        {
+            if(!fin[i]&&(u==-1||dist[i]<dist[u]))
+            {
+                u=i;
+            }
+        }
+        fin[u]=true;
+        for(int i=0;i<v;i++)
+        {
+            dist[i]=min(dist[i]+graph[u][i],dist[i]);
+        }
+    }
+
+}
 int main()
 {
-    int v=4;
+    // int v=4;
     vector<int>adj[v];
     addEdge(adj,0,1);
     addEdge(adj,0,2);
