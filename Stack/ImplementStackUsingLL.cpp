@@ -32,18 +32,18 @@ struct myStack
             cout<<"Stack is empty";
         int res=head->data;
         Node *temp=head;
-        head=head
+        head=head;
     }
 };
 int main()
 {
-    myStack s(5);
-    s.push(5);
-    s.push(10);
-    s.push(15);
-    cout<<s.top()<<endl;
-    s.pop();
-    cout<<s.top()<<endl;
+    myStack s();
+    // s.push(5);
+    // s.push(10);
+    // s.push(15);
+    // //cout<<s.top()<<endl;
+    // s.pop();
+    // //cout<<s.top()<<endl;
 
 
     

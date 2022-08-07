@@ -197,7 +197,7 @@ void printShortestPath(vector<int>adj[],int v)  //shortest path for undirected g
     for(int i=0;i<v;i++)
         cout<<dist[i]<<" ";
 }
-bool DFSRecUndirected(vector<int>adj[], int s, bool visited[], int parent)
+bool DFSRecUndirected(vector<int>adj[], int s, bool visited[], int parent)   //for undirected graphs.
 {
     visited[s]=true;
     for(auto u:adj[s])
@@ -227,7 +227,7 @@ bool cycleUndirected(vector<int>adj[], int v) //If there is an visited element a
     } 
     return false;  
 }
-bool DFSRecDirected(vector<int>adj[],int s, bool visited[], bool recSt[])
+bool DFSRecDirected(vector<int>adj[],int s, bool visited[], bool recSt[]) 
 {
     visited[s]=true;
     recSt[s]=true;
@@ -241,7 +241,7 @@ bool DFSRecDirected(vector<int>adj[],int s, bool visited[], bool recSt[])
     recSt[s]=false;
     return false;
 }
-bool cycleDirected(vector<int>adj[], int v)
+bool cycleDirected(vector<int>adj[], int v)  //for directed graphs-1
 {
     bool visited[v];
     bool recSt[v];
@@ -257,9 +257,92 @@ bool cycleDirected(vector<int>adj[], int v)
     }
     return false;
 }
-//Dijkstra's Algo-> for finding the shortest path: drawback is 
+void topologicalSorting(vector<int>adj[],int v)
+{
+    vector<int>in_degree(v,0);
+    for(int i=0;i<v;i++)    
+    {
+        for(auto x:adj[i])
+            in_degree[x]++;
+    }
+    queue<int>q;
+    for(int i=0;i<v;i++)
+    {
+        if(in_degree[i]==0)
+            q.push(i);
+    }
+    while(q.size()!=0)
+    {
+        int u=q.front();
+        q.pop();
+        cout<<u<<" ";
+        for(int x:adj[u])
+        {
+            if(--in_degree[x]==0)
+                q.push(x);
+        }
+    }
+}
+bool topologicalSort(vector<int>adj[],int v)
+{
+    vector<int>in_degree(v,0);
+    for(int i=0;i<v;i++)
+    {
+        for(int x:adj[i])
+            in_degree[x]++;
+    }
+    queue<int>q;
+    for(int i=0;i<v;i++)
+    {
+        if(in_degree[i]==0)
+            q.push(i);
+    }
+    int count=0;
+    while(q.empty()==false)
+    {
+        int u=q.front();
+        q.pop();
+        for(int x:adj[u])
+            if(in_degree[x]==0)
+                q.push(x);
+        count++;
+    }
+    return (count!=v);
+}
+void DFStopo(vector<int>adj[],int u,stack<int>&st,bool visited[])
+{
+    visited[u]=false;
+    for(int v:adj[u])
+    {
+        if(visited[v]==false)
+            DFStopo(adj, v, st, visited);
+    }
+    st.push(u);
+}
+void topologicalSorting(vector<int>adj[], int v)
+{
+    bool visited[v];
+    for(int i=0;i<v;i++)
+    {
+        visited[i]=false;
+    }
+    stack<int>st;
+    for(int u=0;u<v;u++)
+    {
+        if(visited[u]==false)
+            DFStopo(adj, u, st, visited);
+    }
+    while(st.empty()==false)
+    {
+        int u=st.top();
+        st.top();
+        cout<<u<<" ";
+    }
+}
+
+//Dijkstra's Algo-> for finding the shortest path: drawback is NEGATIVE CYCLE.
 #define v 4
-vector<int>dijkstra(int graph[v][v],int s)
+vector<int> dijkstra(int graph[v][v],int s)
 {
     vector<int>dist(v,INT_MAX);
     vector<bool>fin(v,false);
@@ -272,6 +355,13 @@ vector<int>dijkstra(int graph[v][v],int s)
             {
                 u=i;
             }
+
+
+
+
+
+
+            
         }
         fin[u]=true;
         for(int i=0;i<v;i++)
@@ -313,6 +403,9 @@ int main()
         cout<<"yaya"<<endl;
     else    
         cout<<"Noooo"<<endl;
+
+    topologicalSorting(adj,v);
+
 
     
 }

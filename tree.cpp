@@ -151,6 +151,21 @@ void printLeftView(Node *root)
 {
     printLeft(root,1);
 }
+void printLeftView2(Node *root,vector<int>ans,int level)
+{
+    if(root==NULL)
+        return;
+    if(level==ans.size())
+    {
+        ans.push_back(root->key);
+    }
+    printLeftView2(root->left,ans,level+1);
+    printLeftView2(root->right,ans,level+1);
+
+
+    for(auto x:ans)
+        cout<<x<<" ";
+}
 void printLeftITR(Node *root)  //left view means printing the first elemtns of each level. easy when we will go with levelorder/bfs
 {
     if(root==NULL)
