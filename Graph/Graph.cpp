@@ -371,6 +371,43 @@ vector<int> dijkstra(int graph[v][v],int s)
     }
 
 }
+int DijkstraPriorityQueue(vector<vector<int>>& times, int n, int k) {
+    vector<pair<int,int>>adj[n+1];
+    priority_queue< pair<int,int> , vector<pair<int,int>> , greater<pair<int,int>>> minh;
+    for(int i=0;i<times.size();i++)
+    {
+        int a=times[i][0];
+        int b=times[i][1];
+        int w=times[i][2];
+        adj[a].push_back({b,w});
+    }
+    vector<int>ans(n+1,INT_MAX);
+    ans[k]=0;
+    minh.push({0,k});
+    while(minh.size()!=0)
+    {
+        int curr=minh.top().second;
+        minh.pop();
+        for(auto x:adj[curr])
+        {
+            int next=x.first;
+            int wt=x.second;
+            if( ans[curr] + wt < ans[next] )
+            {
+                minh.push({ans[curr] + wt, next});
+                ans[next] = ans[curr] + wt;
+            }
+        }
+    }
+    int p = 0; 
+    for(int i=1; i<=n; i++)
+    {
+        if(ans[i] == INT_MAX)
+            return -1;
+        p = max(p,ans[i]);
+    }
+    return p;
+}
 int main()
 {
     // int v=4;
