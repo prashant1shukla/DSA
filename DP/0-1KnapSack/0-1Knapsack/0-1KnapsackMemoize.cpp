@@ -21,3 +21,4 @@ int main()
     memset(t,-1,sizeof(t));
     cout<<knapsackMemoize(wt,val,W,n);
 }
+
