@@ -11,15 +11,13 @@ void printingPathsWithDiagonals(string p, int r,int c)
         return;
     }
     if(r>1 && c>1)
-        printingPathsWithDiagonals(p+'H',r,c-1);
+        printingPathsWithDiagonals(p+'D',r-1,c-1);
     
     if(r>1)
         printingPathsWithDiagonals(p+'V',r-1,c);
 
     if(c>1)
         printingPathsWithDiagonals(p+'H',r,c-1);
-    
-
 }
 int main()
 {
