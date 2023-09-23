@@ -16,7 +16,8 @@ int rodCutting(int len_arr[],int price[],int n,int L)
         for(int j=1;j<L+1;j++)
         {
             if(len_arr[i-1]<=j)
-                t[i][j]=max(t[i][j-len_arr[i-1]]+price[i-1],t[i-1][j]);
+                t[i][j]=max(t[i][j-len_arr[i-1]]+price[i-1],t[i-1][j]);  //t[i][j]=max(t[i-1][j-wt[i-1]]+val[i-1],t[i-1][j]);
+
             else
                 t[i][j]=t[i-1][j];
         }

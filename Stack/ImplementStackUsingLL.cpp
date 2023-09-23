@@ -38,12 +38,6 @@ struct myStack
 int main()
 {
     myStack s();
-    // s.push(5);
-    // s.push(10);
-    // s.push(15);
-    // //cout<<s.top()<<endl;
-    // s.pop();
-    // //cout<<s.top()<<endl;
 
 
     

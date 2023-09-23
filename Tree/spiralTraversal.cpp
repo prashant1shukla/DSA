@@ -41,7 +41,6 @@ void printSpiral(Node *root){
     reverse=!reverse;
     }
 }  
-
 int main() {
 	
 	Node *root=new Node(1);

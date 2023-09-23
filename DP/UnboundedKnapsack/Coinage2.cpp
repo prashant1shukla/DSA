@@ -25,7 +25,8 @@ int Coinage2(int coins[],int sum,int n)
         for(int j=1;j<sum+1;j++)
         {
             if(coins[i-1]<=sum)
-                t[i][j]=min(t[i][j-coins[i-1]]+1,t[i-1][j]+0);
+                t[i][j]=min(t[i][j-coins[i-1]]+1,t[i-1][j]+0);    // t[i][j]=max(val[i-1]+t[i-1][j-wt[i-1]],t[i-1][j]);
+
             else
                 t[i][j]=t[i-1][j];
         }

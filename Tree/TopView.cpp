@@ -12,40 +12,36 @@ struct Node
         right=NULL;
     }
 };
-vector<int>v;
-  
-void top(Node *root,int hd,int lvl,map<int,vector<int,int>>&mp)
-{
-    if(root==NULL)
-        return;
-    if(mp.find(hd)==mp.end())
-        mp[hd]=make_pair(root->data,lvl);
-    else
+// vector<int>v;
+vector<int> topView(Node *root)
     {
-        pair < int, int > p = mp[hd];
-        if (p.second > lvl)
-        {
-            mp[hd].second = lvl;
-            mp[hd].first = root -> data;
+        vector<int> ans; 
+        if(root == NULL) return ans; 
+        map<int,int> mpp; 
+        queue<pair<Node*, int>> q; 
+        q.push({root, 0}); 
+        while(!q.empty()) {
+            auto it = q.front(); 
+            q.pop(); 
+            Node* node = it.first; 
+            int line = it.second; 
+            if(mpp.find(line) == mpp.end()) mpp[line] = node->data; 
+            
+            if(node->left != NULL) {
+                q.push({node->left, line-1}); 
+            }
+            if(node->right != NULL) {
+                q.push({node->right, line + 1}); 
+            }
+            
         }
+        
+        for(auto it : mpp) {
+            ans.push_back(it.second); 
+        }
+        return ans; 
     }
-    //if(root->left==NULL)
-    top(root->left,hd-1,lvl+1,mp);
-    //mp[hd]=(root->data);
-    //if(root->right!=NULL)
-    top(root->right,hd+1,lvl+1,mp);
-    // for(auto x:mp)
-    //         cout<<(x.second);
-}
-vector <int> topView(Node *root) {
-    v.clear();
-    map<int,pair<int,int>>mp;
-    mp.clear();
-    top(root,0,0,mp);
-    for(auto x:mp)
-        v.push_back(x.second.first);
-    return v;
-}
+
 int main()
 {
     Node *root=new Node(10);
@@ -56,7 +52,7 @@ int main()
 
     //printSpiral(root);
 
-    topView(root);
+    vector<int>v=topView(root);
     for(auto x:v)
      cout<<x<<" ";  
     

@@ -19,7 +19,8 @@ int Coinage1(int coins[],int sum,int n)
         for(int j=1;j<sum+1;j++)
         {
             if(coins[i-1]<=sum)
-                t[i][j]=t[i][j-coins[i-1]]+t[i-1][j];
+                t[i][j]=t[i][j-coins[i-1]]+t[i-1][j];            
+
             else
                 t[i][j]=t[i-1][j];
         }

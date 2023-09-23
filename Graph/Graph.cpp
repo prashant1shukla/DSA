@@ -187,7 +187,7 @@ void BFS_dist(vector<int>adj[],int v,int s,int dist[])
         }
     }
 }
-void printShortestPath(vector<int>adj[],int v)  //shortest path for undirected graph BFS based approach. 
+void printShortestPath(vector<int>adj[],int v)  //shortest path for undirected graph BFS based approach.   
 {
     int dist[v];
     for(int i=0;i<v;i++)
@@ -197,9 +197,9 @@ void printShortestPath(vector<int>adj[],int v)  //shortest path for undirected g
     for(int i=0;i<v;i++)
         cout<<dist[i]<<" ";
 }
-bool DFSRecUndirected(vector<int>adj[], int s, bool visited[], int parent)   //for undirected graphs.
+bool DFSRecUndirected(vector<int>adj[], int s, bool visited[], int parent)   //for undirected graphs.      
 {
-    visited[s]=true;
+    visited[s]=true; 
     for(auto u:adj[s])
     {
         if(visited[u]==false)
@@ -354,14 +354,7 @@ vector<int> dijkstra(int graph[v][v],int s)
             if(!fin[i]&&(u==-1||dist[i]<dist[u]))
             {
                 u=i;
-            }
-
-
-
-
-
-
-            
+            }    
         }
         fin[u]=true;
         for(int i=0;i<v;i++)
@@ -369,7 +362,6 @@ vector<int> dijkstra(int graph[v][v],int s)
             dist[i]=min(dist[i]+graph[u][i],dist[i]);
         }
     }
-
 }
 int DijkstraPriorityQueue(vector<vector<int>>& times, int n, int k) {
     vector<pair<int,int>>adj[n+1];

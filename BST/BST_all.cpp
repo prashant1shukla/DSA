@@ -94,7 +94,7 @@ Node *delNode(Node *root,int x)
         root->right=delNode(root->right,x);
     else
     {
-        if(root->right==NULL)
+        if(root->left==NULL)
         {
             Node *temp=root->right;
             delete root;
@@ -107,7 +107,7 @@ Node *delNode(Node *root,int x)
             return temp;
         }
         else
-        {
+        { 
             Node *succ=getSuccessor(root);
             root->key=succ->key;
             root->right=delNode(root->right,succ->key);
