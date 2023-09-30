@@ -1,19 +1,15 @@
 #include<bits/stdc++.h>
-
 using namespace std;
-
 class Node {
   public:
     int val;
   Node * left, * right;
 };
-
 vector < vector < int >> zigzagLevelOrder(Node * root) {
   vector < vector < int >> result;
   if (root == NULL) {
     return result;
   }
-
   queue < Node * > nodesQueue;
   nodesQueue.push(root);
   bool leftToRight = true;

@@ -187,7 +187,7 @@ void BFS_dist(vector<int>adj[],int v,int s,int dist[])
         }
     }
 }
-void printShortestPath(vector<int>adj[],int v)  //shortest path for undirected graph BFS based approach.   
+void printShortestPath(vector<int>adj[],int v)  //shortest path for undirected & unweighted graph BFS based approach.   
 {
     int dist[v];
     for(int i=0;i<v;i++)
@@ -206,9 +206,9 @@ bool DFSRecUndirected(vector<int>adj[], int s, bool visited[], int parent)   //f
         {
             if(DFSRecUndirected(adj, u, visited, s)==true)
                 return true;
-            else if(!parent)
-                return true;
         }
+        else if(!parent)
+            return true;
     }
     return false;
 }
@@ -283,7 +283,7 @@ void topologicalSorting(vector<int>adj[],int v)
         }
     }
 }
-bool topologicalSort(vector<int>adj[],int v)
+bool topologicalSort(vector<int>adj[],int v) //cycle detection in directed graph using kahn's algo
 {
     vector<int>in_degree(v,0);
     for(int i=0;i<v;i++)
@@ -303,7 +303,7 @@ bool topologicalSort(vector<int>adj[],int v)
         int u=q.front();
         q.pop();
         for(int x:adj[u])
-            if(in_degree[x]==0)
+            if(--in_degree[x]==0)
                 q.push(x);
         count++;
     }
